@@ -1,0 +1,100 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+
+using namespace std;
+
+vector<char> merge_sort(vector<char>, int, int);
+
+vector<char> merge(vector<char>, vector<char>);
+
+string rearrange(vector<char>);
+
+int main () {
+ string word = "cart";
+ //cin >> word;
+ char *word_arr = new char[word.length() + 1];
+  
+ strcpy(word_arr, word.c_str());
+
+ vector<char> temp1 = vector<char>(3, 'c');
+ vector<char> temp2 = vector<char>(3, 'b');
+
+ //vector<char> result = merge(temp1, temp2);
+ 
+
+ vector<char> res = merge_sort(vector<char>(word_arr, word_arr + sizeof(word_arr)/sizeof(char)), 0, word.length() - 1);
+
+ for (vector<char>::iterator it = res.begin(); it != res.end(); it++) {
+   cout << *it << endl;
+ }
+
+ //cout << rearrange(word_arr) << endl;
+}
+
+vector<char> merge_sort(vector<char> arr, int lo, int hi) {
+  if (lo == hi) {
+    vector<char> result(1, arr[lo]);
+    return result;
+  }
+
+  int mid = (hi + lo ) / 2;
+
+  vector<char> left = merge_sort(arr, lo, mid);
+  vector<char> right = merge_sort(arr, mid + 1, hi);
+  vector<char> result = merge(left, right);
+
+  return result;
+  
+}
+
+void swap(vector<char> &arr, int i, int j) {
+  char arr = arr[i];
+  
+}
+
+void quick_sort(vector<char> &arr, int lo, int hi) {
+  if (lo == hi) {
+    return;
+  }
+  int mid = (hi + lo) / 2;
+  // Swap with first element;
+  
+  while(lo < hi) {
+    if (
+  }
+  
+}
+
+vector<char> merge(vector<char> arr1, vector<char> arr2) {
+  vector<char> merged;
+  unsigned int count1 = 0;
+  unsigned int count2 = 0;
+  for (unsigned int i = 0; i < arr1.size() + arr2.size(); i++) {
+    if ((count1 < arr1.size() && arr1[count1] < arr2[count2]) || count2 >= arr2.size()) {
+      //cout << arr1[count1] << endl;
+      merged.push_back(arr1[count1++]);
+    }
+    else {
+      //cout << arr2[count2] << endl;
+      merged.push_back(arr2[count2++]);
+    }
+  }
+  return merged;
+}
+
+string rearrange(char word[]) {
+  char temp;
+  string arranged;
+  
+  for (unsigned int i = sizeof(word) / sizeof(char) - 1; i > 0; i--) {
+    if (word[i - 1] < word[i]) {
+      temp = word[i - 1];
+      word[i - 1] = word[i];
+      word[i] = temp;
+      break;
+    }
+  }
+  arranged = string(word);
+  return arranged;
+}
